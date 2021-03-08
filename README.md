@@ -56,9 +56,12 @@ The Postgres database tables were designed to optimize queries on song play anal
 
 ### Prerequisites
 
-The solution was built using Python 3.9.2 and the following package versions:
- - sqlalchemy==1.3.23
- - pandas==1.2.3
+The solution was built using Python 3.6.3 and the following package versions are required:
+ - **pandas==1.1.5**
+ - SQLAlchemy==1.1.13
+ - sqlalchemy-schemadisplay==1.3
+
+For the complete package list used to build and run this application, please refer to the file **requirements-env.txt***
 
 
 ### ETL Pipelines
@@ -79,6 +82,14 @@ Alternatively:
 python create_tables.py
 python etl_alchemy.py
 ```
+
+In order to generate the database ER diagram, run the following commands:
+
+```
+python create_tables.py
+python create_erd.png
+```
+
 
 ## Analytics
 

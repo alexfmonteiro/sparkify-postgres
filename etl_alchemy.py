@@ -6,7 +6,15 @@ from sqlalchemy import create_engine
 
 
 def process_song_file(engine, df):
+    """
+    This procedure processes a given dataframe and uses the pandas to_sql function to perform bulk inserts.
+    It extracts the song information in the dataframe in order to store it into the songs table.
+    Then it extracts the artist information in the dataframe in order to store it into the artists table.
 
+    INPUTS: 
+    * cur the cursor variable
+    * filepath the file path to the song file
+    """
     # load songs
     songs_df = df[['song_id', 'title', 'artist_id', 'year', 'duration']]
     songs_df.to_sql('songs', engine, if_exists='replace', chunksize=500, method='multi', index=False)
@@ -25,7 +33,15 @@ def process_song_file(engine, df):
 
 
 def process_log_file(engine, df):
-
+    """
+    This procedure processes a given dataframe and uses the pandas to_sql function to perform bulk inserts.
+    It extracts the log information in order to store it into the tables: time, users, and songplays.
+    
+    INPUTS: 
+    * cur the cursor variable
+    * filepath the file path to the song file
+    """
+    
     # filter by NextSong action
     df = df[df["page"]=="NextSong"]
 
@@ -67,6 +83,15 @@ def process_log_file(engine, df):
 
 
 def process_data(engine, filepath, func):
+    """
+    This procedure crawls into the given directory, reads the json files and creates a single dataframe with all the data.
+    Then, it calls the function to handle the dataframes.
+    
+    INPUTS: 
+    * engine the sqlalchemy engine variable
+    * filepath the file path to the datasets (songs or logs)
+    * func the specific function to process the dataframes
+    """       
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -89,6 +114,10 @@ def process_data(engine, filepath, func):
 
 
 def main():
+    """
+    This is the main code.
+    It creates the sqlalchemy database engine and call the functions that will process each type of files.
+    """      
     engine = create_engine('postgresql+psycopg2://student:student@localhost:5432/sparkifydb')
 
     process_data(engine, filepath='data/song_data', func=process_song_file)
