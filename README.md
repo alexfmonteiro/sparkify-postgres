@@ -38,6 +38,8 @@ And below is an example of what the data in a log file, `2018-11-12-events.json`
 
 The Postgres database tables were designed to optimize queries on song play analysis. In order to do that, it was created a  star schema including the following tables:
 
+![Entity-Relatioship Diagram](https://github.com/alexfmonteiro/sparkify-postgres/blob/main/sparkifydb_erd.png)
+
 #### Fact Table
  1. **songplays** - records in log data associated with song plays i.e. records with page NextSong
     - songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent
