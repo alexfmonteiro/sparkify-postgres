@@ -67,7 +67,7 @@ time_table_create = ("""
 songplay_table_insert = ("""
     INSERT INTO songplays (songplay_id, start_time, user_id, level, song_id,
                            artist_id, session_id, location, user_agent)
-    VALUES (DEFAULT, %s, %s, %s, %s, %s, %s, %s, %s);
+    VALUES (DEFAULT, TO_TIMESTAMP(%s / 1000), %s, %s, %s, %s, %s, %s, %s);
 """)
 
 user_table_insert = ("""
@@ -91,7 +91,7 @@ artist_table_insert = ("""
 
 time_table_insert = ("""
     INSERT INTO time (start_time, hour, day, week, month, year, weekday)
-    VALUES (%s, %s, %s, %s, %s, %s, %s)
+    VALUES (TO_TIMESTAMP(%s / 1000), %s, %s, %s, %s, %s, %s)
     ON CONFLICT DO NOTHING;
 """)
 
